@@ -1,0 +1,10 @@
+﻿
+.custom-edit-button {
+    background-color: #002E94; /* Change this color to your preferred color */
+    color: #fff; /* Text color for the button */
+}
+
+.custom-delete-button {
+    background-color: #e74c3c; /* Change this color to your preferred color */
+    color: #fff; /* Text color for the button */
+}

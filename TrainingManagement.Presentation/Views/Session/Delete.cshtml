@@ -1,0 +1,71 @@
+﻿@model SessionViewModel
+@{
+    ViewData["Title"] = "Delete Session";
+}
+
+    <h2>Delete Session</h2>
+
+    <p>Are you sure you want to delete this session ?</p>
+    <div class="containers">
+  
+        <div class="propertys">
+            <label>Trainee Name:</label>
+            <div class="propertys-value">
+                @(Model.TraineeName != string.Empty ? Model.TraineeName : "-")
+            </div>
+        </div>
+
+        <div class="propertys">
+            <label>Trainer Name:</label>
+            <div class="propertys-value">
+                @(Model.TrainerName != null ? Model.TrainerName.NameEn : "-")
+            </div>
+        </div>
+
+        <div class="propertys">
+            <label>Training Type :</label>
+            <div class="propertys-value">
+                @(Model.TrainingType != null ? Model.TrainingType.NameEn : "-")
+            </div>
+        </div>
+
+
+        <div class="propertys">
+            <label>Training Topics :</label>
+            <div class="propertys-value">
+                @(Model.TrainingTopic != null ? Model.TrainingTopic.NameEn : "-")
+            </div>
+        </div>
+ 
+
+        <div class="propertys">
+            <label>Start Date:</label>
+            <div class="propertys-value">
+                @(Model.StartDate != DateTime.MinValue ? Model.StartDate.ToString("yyyy-MM-dd") : "-")
+            </div>
+
+        </div>
+
+        <div class="propertys">
+            <label>Exp End Date:</label>
+            <div class="propertys-value">
+                @(Model.ExpectedEndDate != DateTime.MinValue ? Model.ExpectedEndDate.ToString("yyyy-MM-dd") : "-")
+            </div>
+
+        </div>
+ 
+
+    </div>
+    <form id="deleteForm" method="post" asp-controller="Session" asp-action="DeleteConfirmed" asp-route-id="@Model.SessionId">
+        <button type="submit" class="btn btn-primary">Yes</button>
+        <a asp-controller="Session" asp-action="Index">Cancel</a>
+    </form>
+
+    <script>
+         document.getElementById("deleteForm").addEventListener("submit", function (event) {
+            var confirmed = confirm("Are you sure you want to delete session for @Model.TraineeName?");
+            if (!confirmed) {
+                event.preventDefault(); 
+            }
+        });
+    </script>

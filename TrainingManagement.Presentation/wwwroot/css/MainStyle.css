@@ -1,0 +1,31 @@
+﻿.containers {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+.custom-edit-button {
+    background-color: #002E94; /* Change this color to your preferred color */
+    color: #fff; /* Text color for the button */
+}
+
+.custom-delete-button {
+    background-color: #e74c3c; /* Change this color to your preferred color */
+    color: #fff; /* Text color for the button */
+}
+.propertys {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+    .propertys label {
+        font-weight: bold;
+        width: 40%;
+    }
+
+.propertys-value {
+    width: 60%;
+}

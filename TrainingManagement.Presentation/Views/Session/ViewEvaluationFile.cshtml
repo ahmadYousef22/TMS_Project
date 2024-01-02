@@ -1,0 +1,53 @@
+﻿@model List<Dictionary<string, string>>
+
+@{
+    ViewData["Title"] = "View Evaluation File";
+}
+
+<div class="container">
+    <div class="row  m-2">
+        <div class="col-md-6">
+            <h3 class="text-dark">Evaluation file for @ViewBag.TraineeName</h3>
+        </div>
+        <div class="col-md-6 text-right">
+            <a asp-controller="Session" asp-action="DownloadExcelFile" asp-route-sessionId="@ViewBag.SessionId" class="btn btn-info">Ecxel File &nbsp;<i class="bi bi-download"></i></a>
+        </div>
+    </div>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    @foreach (var header in Model[0])
+                    {
+                        <th>@header.Key</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in Model)
+                {
+                    <tr>
+                        @foreach (var cell in row)
+                        {
+                            <td>@cell.Value</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-warning" role="alert">
+            No data found in the Excel file.
+        </div>
+    }
+</div>
+@section Scripts
+{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

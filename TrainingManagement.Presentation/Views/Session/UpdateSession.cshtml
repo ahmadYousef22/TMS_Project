@@ -1,0 +1,213 @@
+﻿@model SessionViewModel
+@{
+    ViewData[""] = "Update Session";
+}
+
+<link href="~/Design/css/style.css" rel="stylesheet" />
+<link href="~/css/select.css" rel="stylesheet" />
+
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Courses</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index">Courses</a></li>
+            <li class="breadcrumb-item active">Update</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <form id="session-entry-form" method="post" asp-action="UpdateSession" enctype="multipart/form-data">
+
+
+                    <div class="row">
+                        <br />
+                        <hr />
+                        <div class="col-md-6">
+                            <input type="hidden" asp-for="Year" id="year" />
+                            <input type="hidden" asp-for="SessionId" />
+
+
+                            <div class="mb-3">
+                                <label asp-for="TraineeName">Trainee Name: <span class="required-field"></span></label>
+                                <input asp-for="TraineeName" id="trainee" class="form-control" placeholder="Trainee Name" />
+                                <span asp-validation-for="TraineeName" class="text-danger"></span>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label asp-for="TrainerNameId">Trainer Name: <span class="required-field"></span></label>
+                                <select asp-for="TrainerNameId" id="trainer" class="form-select b-1" asp-items="@(new SelectList(Model.TrainersList, "Id", "NameEn"))">
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="TrainingTopicId">Training Topic: <span class="required-field"></span></label>
+                                <select asp-for="TrainingTopicId" id="topic" class="form-select b-1" asp-items="@(new SelectList(Model.TopicsList, "Id", "NameEn"))">
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="TrainingTypeId">Training Types: <span class="required-field"></span></label>
+                                <select asp-for="TrainingTypeId" class="form-select b-1" asp-items="@(new SelectList(Model.TypesList, "Id", "NameEn"))">
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="TrainingStatusId">Training Status: <span class="required-field"></span></label>
+                                <select asp-for="TrainingStatusId" class="form-select b-1" asp-items="@(new SelectList(Model.StatusList, "Id", "NameEn"))">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="TrainingResultId">Training Result:</label>
+                                <select asp-for="TrainingResultId" class="form-select b-1">
+                                    <option value="">Select Result</option>
+                                    @foreach (var item in Model.ResultsList)
+                                    {
+                                        <option value="@item.Id">@item.NameEn</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="EvaluationFile" class="form-label">Evaluation File:</label>
+                                <input asp-for="EvaluationFile" type="file" id="evaluationFile" name="uploadedFile" accept=".xlsx, .xls, .csv" class="form-control" />
+                                <span asp-validation-for="EvaluationFile" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="EvaluationScore">Evaluation Score:</label>
+                                <input asp-for="EvaluationScore" min="0" step="any/" type="number" class="form-control" min="0" max="5" />
+                                <span asp-validation-for="EvaluationScore" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3 date-input-container">
+                                <label asp-for="StartDate">Start Date: <span class="required-field"></span></label>
+                                <input asp-for="StartDate" id="startDate" name="startDate" class="form-control" type="date" placeholder="Select Start Date" />
+                                <i class="far fa-calendar" id="start"></i>
+
+                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3 date-input-container">
+
+                                <label asp-for="ExpectedEndDate">End Date: <span class="required-field"></span></label>
+                                <input asp-for="ExpectedEndDate" id="endDate" class="form-control" type="date" placeholder="Select Expected End Date" />
+                                <i class="far fa-calendar" id="end"></i>
+
+                                <span asp-validation-for="ExpectedEndDate" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3 date-input-container">
+
+                                <label asp-for="FinalPresentationDate"> Final Presentation Date:</label>
+                                <input asp-for="FinalPresentationDate" id="FinalPresintationDate" type="date" placeholder="Select Final Presintation Date" class="form-control" />
+                                <i class="far fa-calendar" id="end"></i>
+
+                                <span asp-validation-for="FinalPresentationDate" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3 date-input-container">
+                                <label asp-for="ActualEndDate">Actual End Date:</label>
+                                <input asp-for="ActualEndDate" id="AcctualEndDate" type="date" placeholder="Select Acctual End Date" class="form-control" />
+                                <i class="far fa-calendar" id="end"></i>
+
+                                <span asp-validation-for="ActualEndDate" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Comment">Comment:</label>
+                                <textarea asp-for="Comment" rows="4" style="max-width: 100%; max-height: 200px; min-height:50px;" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col text-center">
+                            <button type="submit" id="btnsave" class="btn waves-effect waves-light btn btn-info hidden-sm-down text-white pb-2">Save</button>
+                            <a asp-controller="Session" asp-action="Index" class="btn btn-secondary">Back to List</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            flatpickr("#startDate", {
+                dateFormat: "Y-m-d",
+                minDate: "today",
+                onChange: function (selectedDates, dateStr, instance) {
+                    flatpickr("#endDate", {
+                        minDate: dateStr,
+                    });
+                },
+            });
+
+            flatpickr("#endDate", {
+                dateFormat: "Y-m-d",
+                minDate: "tomorrow",
+            });
+
+            flatpickr("#AcctualEndDate", {
+                dateFormat: "Y-m-d",
+                minDate: null,
+            });
+
+            flatpickr("#FinalPresintationDate", {
+                dateFormat: "Y-m-d",
+                minDate: null,
+            });
+        });
+    </script>
+}
+
+
+
+
+<style>
+    i.far.fa-calendar {
+        position: absolute;
+        top: 57%;
+        right: 23px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #666;
+    }
+
+    .fa-calendar {
+        position: absolute;
+        right: 10px;
+        top: 73%;
+        transform: translateY(-55%);
+        pointer-events: none;
+    }
+
+    .date-input-container {
+        position: relative;
+    }
+
+        .date-input-container input[type="date"] {
+            padding-right: 25px;
+        }
+</style>

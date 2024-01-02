@@ -1,0 +1,372 @@
+﻿@model AddLookupViewModel
+@{
+    ViewData["Title"] = "Trainers";
+}
+
+<link href="~/Design/css/style.css" rel="stylesheet" />
+<link href="~/css/select.css" rel="stylesheet" />
+
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Lists</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="index" asp-controller="home">List</a></li>
+            <li class="breadcrumb-item active">Trainers</li>
+        </ol>
+    </div>
+    <div class="col-md-7 align-self-center">
+
+        <button type="button" class="btn waves-effect waves-light pull-right btn btn-info hidden-sm-down text-white" data-toggle="modal" data-target="#exampleModal">
+            Add Trainer
+        </button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                </div>
+                <table id="myTable" class="table table-hover">
+                    <thead></thead>
+                    <tbody class="w-100"></tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href="~/css/site - copy.css" rel="stylesheet" />
+
+<div class="container m-2">
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Trainer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="mx-auto" style="width: 50%;">
+                            <form id="addTopicForm" method="post">
+                                <div>
+                                    <div class="form-group">
+                                        <label asp-for="NameEn"></label>
+                                        <input asp-for="NameEn" id="nameEn" class="form-control" maxlength="100" required />
+                                        <span asp-validation-for="NameEn" class="text-danger"></span>
+                                    </div>
+
+
+                                    <div>
+                                        <input id="CategoryId" asp-for="LookupCategoryId" value="500" type="hidden" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="saveTopicBtn" class="btn btn-outline-primary">Save changes</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Trainer Name</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="mx-auto" style="width: 50%;">
+                            <form id="editTopicForm" method="post">
+                                <div>
+                                    <div class="form-group">
+                                        <label asp-for="NameEn"></label>
+                                        <input asp-for="NameEn" id="editNameEn" class="form-control" maxlength="100" required />
+                                        <span asp-validation-for="NameEn" class="text-danger"></span>
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="editSubmitBtn" class="btn btn-outline-primary">Save Changes</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+@section Scripts
+    {
+
+
+
+    <script type="text/javascript">
+        var dataTable;
+
+        $("#saveTopicBtn").click(function () {
+            var nameEn = $("#nameEn").val().trim();
+            var categoryId = $("#CategoryId").val();
+
+
+            if (nameEn === '') {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Please fill in both fields!',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+            var newTopic = {
+                NameEn: nameEn,
+                LookupCategoryId: categoryId
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/api/ListApi/AddItem",
+                contentType: "application/json",
+                data: JSON.stringify(newTopic),
+                success: function (data) {
+                    console.log(data);
+                    $("#nameEn").val("");
+                    LoadData(); // Reload the table data
+                    $("#exampleModal").modal("hide");
+
+                    Swal.fire({
+                        title: 'Success!',
+                        text: data.message,
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        console.error(xhr, status, error);
+                    });
+
+                    $("#exampleModal").modal("hide");
+                },
+                error: function (xhr, status, error) {
+                    // Handle errors
+                    Swal.fire({
+                        title: 'Error!',
+                        text: xhr.responseJSON.message,
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        console.error(xhr, status, error);
+                    });
+                    console.log(xhr.responseJSON.message);
+                }
+            });
+        });
+
+        $(function () {
+            LoadData();
+        });
+
+        function LoadData() {
+            if (dataTable) {
+                dataTable.destroy();
+            }
+
+            $.ajax({
+                type: 'get',
+                url: '/api/ListApi/Trainers',
+                dataType: 'json',
+                data: { id: '' },
+                success: function (data) {
+                    var items = '';
+                    var tableBody = $('#myTable tbody'); // Select the table body
+
+                    // Clear the existing rows from the table
+                    tableBody.empty();
+
+                    $.each(data, function (i, item) {
+                        var editButton = '<button class="btn btn-outline-primary custom-edit-bfutton" data-toggle="modal" data-target="#editModal" onclick="editRow(' + item.id + ')">Edit</button>';
+                        var deleteButton = '<button class="btn btn-outline-danger custom-delete-bfutton js-delete" data-id="' + item.id + '">Delete</button>';
+                        var rows = "<tr>"
+                            + "<td>" + item.nameEn + "</td>"
+                            + "<td>" + editButton + " " + deleteButton + "</td>"
+                            + "</tr>";
+
+                        // Append the new rows to the table body
+                        tableBody.append(rows);
+                    });
+
+                    // Delete button
+                    $('.js-delete').on('click', function () {
+                        var btn = $(this);
+                        bootbox.confirm({
+                            message: 'Are you sure that you want to delete this trainer name?',
+                            buttons: {
+                                confirm: {
+                                    label: 'Yes',
+                                    className: 'btn-danger'
+                                },
+                                cancel: {
+                                    label: 'No',
+                                    className: 'btn-secondary'
+                                }
+                            },
+                            callback: function (result) {
+                                if (result) {
+                                    $.ajax({
+                                        url: `/api/ListApi/DeleteItem/?id=${btn.data('id')}`,
+                                        method: 'POST',
+                                        success: function () {
+                                            LoadData(); // Reload
+                                            Swal.fire({
+                                                title: 'Success!',
+                                                text: 'The trainer name was deleted successfully',
+                                                icon: 'success',
+                                                confirmButtonText: 'OK'
+                                            }).then(() => {
+
+                                            });
+                                        },
+                                        error: function () {
+                                            Swal.fire({
+                                                title: 'Error!',
+                                                text: 'Something went wrong',
+                                                icon: 'error',
+                                                confirmButtonText: 'OK'
+                                            });
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    });
+
+                    // Initialize the DataTable with column headers
+                    dataTable = $('#myTable').DataTable({
+                        "autoWidth": true,
+                        "paging": true,
+                        "columns": [
+                            { "title": "Trainer Name", "width": "750px" },
+                            { "title": "", "sortable": false }
+                        ],
+                        "lengthMenu": [5, 8, 10],
+                        "pageLength": 5,
+                    });
+                },
+                error: function (xhr, status, error) {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: xhr.responseJSON.message,
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        console.error(xhr, status, error);
+                    });
+                }
+            });
+
+            return false;
+        }
+
+        var model;
+        function editRow(id) {
+
+            $.ajax({
+                type: "get",
+                url: "/api/ListApi/GetById",
+                contentType: "application/json",
+                data: { id: id },
+                success: function (data) {
+                    console.log(data);
+                    model = data;
+                    $('#editNameEn').val(data.nameEn);
+                },
+                error: function (xhr, status, error) {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: xhr.responseJSON.message,
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            });
+
+        }
+
+        $("#editSubmitBtn").click(function () {
+            var updatedNameEn = $("#editNameEn").val().trim();
+
+            if (updatedNameEn === '') {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Please fill in both fields!',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            var updatedItem = {
+                Id: model.id, //  ID
+                NameEn: updatedNameEn,
+            };
+            console.log(model);
+
+            $.ajax({
+                type: "POST",
+                async: true,
+                url: "/api/ListApi/Edit",
+                contentType: "application/json",
+                data: JSON.stringify(updatedItem),
+                success: function (data) {
+
+                    LoadData();
+                    $("#editModal").modal("hide"); // Close the modal
+                    console.log(data);
+                    Swal.fire({
+                        title: 'Success!',
+                        text: data.message,
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                },
+                error: function (xhr, status, error) {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: xhr.responseJSON.message,
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            });
+        });
+
+    </script>
+
+
+    <partial name="_ValidationScriptsPartial" />
+
+}

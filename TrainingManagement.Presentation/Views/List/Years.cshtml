@@ -1,0 +1,426 @@
+﻿@model AddLookupViewModel
+@{
+    ViewData["Title"] = "Training Years";
+}
+
+<link href="~/Design/css/style.css" rel="stylesheet" />
+<link href="~/css/select.css" rel="stylesheet" />
+
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Lists</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="index" asp-controller="home">List</a></li>
+            <li class="breadcrumb-item active">Years</li>
+        </ol>
+    </div>
+    <div class="col-md-7 align-self-center">
+
+        <button type="button" class="btn waves-effect waves-light pull-right btn btn-info hidden-sm-down text-white" data-toggle="modal" data-target="#exampleModal">
+            Add Year
+        </button>
+    </div>
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <table id="myTable" class="table table-hover">
+                    <tbody class="w-100"></tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<link href="~/css/site - copy.css" rel="stylesheet" />
+<div class="container m-2">
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Year</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="mx-auto" style="width: 50%;">
+                            <form id="addTopicForm" method="post">
+                                <div>
+                                    <div class="form-group">
+                                        <label asp-for="NameEn">Year</label>
+                                        <input asp-for="NameEn" id="nameEn" type="number" class="form-control" min="2009" maxlength="4" required />
+                                        <div id="liveMessage" class="text-danger"></div>
+
+                                        <span asp-validation-for="NameEn" class="text-danger"></span>
+                                    </div>
+
+                                    <div>
+                                        <input id="CategoryId" asp-for="LookupCategoryId" value="600" type="hidden" />
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="saveYearBtn" class="btn btn-outline-primary">Save changes</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Year</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="mx-auto" style="width: 50%;">
+                            <form id="editTopicForm" method="post">
+                                <div>
+                                    <div class="form-group">
+                                        <label asp-for="NameEn">Year</label>
+                                        <input asp-for="NameEn" type="number" id="editNameEn" min="2009" class="form-control" maxlength="4" required />
+                                        <div id="liveMessage" class="text-danger"></div>
+
+                                        <span asp-validation-for="NameEn" class="text-danger"></span>
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="editSubmitBtn" class="btn btn-outline-primary">Save Changes</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+<script type="text/javascript">
+    var dataTable;
+
+    $(document).ready(function () {
+        var nameEnInput = $("#nameEn");
+        var liveMessage = $("#liveMessage");
+
+        nameEnInput.on('input', function () {
+            // Get the user's input
+            var userInput = nameEnInput.val().trim();
+
+            if (userInput === '') {
+                liveMessage.text('Please fill this field.');
+            } else if (!/^\d{4}$/.test(userInput)) {
+                liveMessage.text('Please enter a valid input for year!');
+            } else {
+                // Clear the live message if the input is valid
+                liveMessage.text('');
+            }
+        });
+    });
+    $("#saveYearBtn").click(function () {
+        var nameEn = $("#nameEn").val().trim();
+        var categoryId = $("#CategoryId").val();
+
+
+        var yearInput = /^\d{4}$/;
+        // Check if the input fields are empty
+        if (nameEn === '') {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Please fill in both fields!',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return; // Prevent the form from submitting if fields are empty
+        }
+
+        if (!yearInput.test(nameEn)) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Please enter a valid input for year!',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        // Create object for topic data
+        var newYear = {
+            NameEn: nameEn,
+            LookupCategoryId: categoryId
+        };
+
+        // Send an AJAX request to add new topic
+        $.ajax({
+            type: "POST",
+            url: "/api/ListApi/AddItem",
+            contentType: "application/json",
+            data: JSON.stringify(newYear),
+            success: function (data) {
+                $("#nameEn").val("");
+                LoadData(); // Reload  table
+                Swal.fire({
+                    title: 'Success!',
+                    text: data.message,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    console.error(xhr, status, error);
+                });
+                $("#exampleModal").modal("hide"); // Close the modal
+            },
+            error: function (xhr, status, error) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: xhr.responseJSON.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    console.error(xhr, status, error);
+                });
+                console.log(xhr.responseJSON.message);
+            }
+        });
+        closeModal("#exampleModal");
+
+    });
+
+    $(function () {
+        LoadData();
+    });
+
+    function closeModal(modalId) {
+        $(modalId).modal("hide");
+    }
+
+
+    function LoadData() {
+        if (dataTable) {
+            dataTable.destroy();
+        }
+
+        $.ajax({
+            type: 'get',
+            url: '/api/ListApi/Years',
+            dataType: 'json',
+            data: { id: '' },
+            success: function (data) {
+                var items = '';
+                var tableBody = $('#myTable tbody');
+
+                tableBody.empty();
+
+                $.each(data, function (i, item) {
+                    var editButton = '<button class="btn btn-outline-primary custom-eddit-button" data-toggle="modal" data-target="#editModal" onclick="editRow(' + item.id + ')">Edit</button>';
+                    var deleteButton = '<button class="btn btn-outline-danger custom-ddelete-button js-delete" data-id="' + item.id + '">Delete</button>';
+                    var rows = "<tr>"
+                        + "<td >" + item.nameEn + "</td>"
+                        + "<td>" + editButton + " " + deleteButton + "</td>"
+                        + "</tr>";
+
+                    tableBody.append(rows);
+                });
+
+                // Delete button
+                $('.js-delete').on('click', function () {
+                    var btn = $(this);
+                    bootbox.confirm({
+                        message: 'Are you sure that you want to delete this Year?',
+                        buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-danger'
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-secondary'
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) {
+                                $.ajax({
+                                    url: `/api/ListApi/DeleteItem/?id=${btn.data('id')}`,
+                                    method: 'POST',
+                                    success: function () {
+                                        LoadData(); // Reload
+                                        Swal.fire({
+                                            title: 'Success!',
+                                            text: 'The Year was deleted successfully',
+                                            icon: 'success',
+                                            confirmButtonText: 'OK'
+                                        }).then(() => {
+
+                                        });
+                                    },
+                                    error: function () {
+                                        Swal.fire({
+                                            title: 'Error!',
+                                            text: 'Something went wrong',
+                                            icon: 'error',
+                                            confirmButtonText: 'OK'
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    });
+                });
+
+                dataTable = $('#myTable').DataTable({
+                    "autoWidth": true,
+                    "paging": true,
+                    "columns": [
+                        { "title": "Year ", "width": "750px" },
+                        { "title": "", "sortable": false }
+                    ],
+                    "lengthMenu": [5, 8, 10],
+                    "pageLength": 5,
+                });
+            },
+            error: function (xhr, status, error) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: xhr.responseJSON.message,
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    console.error(xhr, status, error);
+                });
+            }
+        });
+
+        return false;
+    }
+
+    var model;
+    function editRow(id) {
+
+        $.ajax({
+            type: "get",
+            url: "/api/ListApi/GetById",
+            contentType: "application/json",
+            data: { id: id },
+            success: function (data) {
+                console.log(data);
+                model = data;
+                $('#editNameEn').val(data.nameEn);
+            },
+            error: function (xhr, status, error) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: xhr.responseJSON.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
+
+
+
+    }
+
+
+    $("#editSubmitBtn").click(function () {
+
+        var updatedNameEn = $("#editNameEn").val().trim();
+        // Check if the input is empty
+        var EdityearInput = /^\d{4}$/;
+        // Check if the input fields are empty
+        if (updatedNameEn === '') {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Please fill in both fields!',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return; // Prevent the form from submitting if fields are empty
+        }
+
+        if (!EdityearInput.test(updatedNameEn)) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Please enter a valid input for year!',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        var updatedItem = {
+            Id: model.id,
+            NameEn: updatedNameEn,
+        };
+        console.log(model);
+        // Send an AJAX to update the item
+        $.ajax({
+            type: "POST",
+            async: true,
+            url: "/api/ListApi/Edit",
+            contentType: "application/json",
+            data: JSON.stringify(updatedItem),
+            success: function (data) {
+                LoadData(); // Reload the table data
+                $("#editModal").modal("hide"); // Close the modal
+                console.log(data);
+                Swal.fire({
+                    title: 'Success!',
+                    text: data.message,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            },
+            error: function (xhr, status, error) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: xhr.responseJSON.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
+        closeModal("#editModal");
+
+    });
+
+
+</script>
+
+<partial name="_ValidationScriptsPartial" />
+
+
+

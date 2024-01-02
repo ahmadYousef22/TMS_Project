@@ -1,0 +1,150 @@
+﻿@model IEnumerable<UserViewModel>
+
+@{
+    ViewData["Title"] = "Users";
+}
+<link href="~/css/site - copy.css" rel="stylesheet" />
+
+
+<div id="alert" class="alert alert-success alert-dismissible fade show mt-4 d-none" role="alert">
+    <strong>User Deleted successfully!</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@*<table class="table table-striped mt-4">
+    <thead>
+        <tr class="bg-primary text-white">
+            <th>FullName</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr class="border border-dark">
+                <td>@user.FullName</td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@string.Join(", ", user.Roles.ToList())</td>
+                <td>
+                    <a class="btn btn-sm custom-edit-button" asp-controller="users" asp-action="EditUser" asp-route-userId="@user.Id">
+                        Edit User
+                    </a>
+                    <a class="btn btn-sm custom-delete-button js-delete" href="javascript:;" data-id="@user.Id">Delete User </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+*@
+
+
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">User Managment </h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="index" asp-controller="home">Account</a></li>
+            <li class="breadcrumb-item active">User Managment</li>
+        </ol>
+    </div>
+    <div class="col-md-7 align-self-center">
+        <a asp-action="Add"
+        class="btn waves-effect waves-light btn btn-info pull-right hidden-sm-down text-white">
+            Add New User
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <!-- column -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+ 
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>FullName</th>
+                                @*<th>Username</th>*@
+                                <th>Email</th>
+                                <th>Roles</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var user in Model)
+                            {
+                                <tr class="border border-dark">
+                                    <td>@user.FullName</td>
+                                    @*<td>@user.UserName</td>*@
+                                    <td>@user.Email</td>
+                                    <td>@string.Join(", ", user.Roles.ToList())</td>
+                                    <td>
+                                        <a class="btn btn-outline-primary custom-egdit-button" asp-controller="users" asp-action="EditUser" asp-route-userId="@user.Id">
+                                            Edit User
+                                        </a>
+                                        <a class="btn btn-outline-danger js-delete" href="javascript:;" data-id="@user.Id">Delete User </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*this script should be move to a js file*@
+@section Scripts{
+    <script>
+        $(document).ready(function(){
+            $('.js-delete').on('click', function(){
+                var btn = $(this);
+                bootbox.confirm({
+                    message: 'Are you sure that you want to delete this user?',
+                    buttons: {
+                        confirm: {
+                            label: 'Yes',
+                            className: 'btn-danger'
+                        },
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-secondary'
+                        }
+                    },
+                    callback: function (result) {
+                        if(result){
+                            $.ajax({
+                                url:`/api/users/?userId=${btn.data('id')}`,
+                                method: 'DELETE',
+                                success: function(){
+                                    btn.parents('tr').fadeOut(); // to remove the row with animation
+                                    $('#alert').removeClass('d-none');
+
+                                    setTimeout(function () 
+                                        { 
+                                            $('#alert').addClass('d-none'); 
+                                        }, 3000);
+                                },
+                                error: function () {
+                                    alert('something went wrong');
+                                }
+                            });
+                        }
+                    }
+                });
+              
+
+
+            });
+        });
+    </script>
+}
+

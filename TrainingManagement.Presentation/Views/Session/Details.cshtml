@@ -1,0 +1,164 @@
+﻿@model SessionViewModel
+@{
+    ViewData["Title"] = "Session Details";
+}
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Courses</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index">Courses</a></li>
+            <li class="breadcrumb-item active">Details</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="propertys">
+                    <label>Start Date:</label>
+                    <div class="propertys-value">
+                        @(Model.StartDate != DateTime.MinValue ? Model.StartDate.ToString("yyyy-MM-dd") : "-")
+                    </div>
+
+                </div>
+
+                <div class="propertys">
+                    <label>Exp End Date:</label>
+                    <div class="propertys-value">
+                        @(Model.ExpectedEndDate != DateTime.MinValue ? Model.ExpectedEndDate.ToString("yyyy-MM-dd") : "-")
+                    </div>
+
+                </div>
+
+                <div class="propertys">
+                    <label>Year:</label>
+                    <div class="propertys-value">
+                        @(Model.Year != string.Empty ? Model.Year : "-")
+                    </div>
+                </div>
+
+                <div class="propertys">
+                    <label>Trainee Name:</label>
+                    <div class="propertys-value">
+                        @(Model.TraineeName != string.Empty ? Model.TraineeName : "-")
+                    </div>
+                </div>
+
+                <div class="propertys">
+                    <label>Trainer Name:</label>
+                    <div class="propertys-value">
+                        @(Model.TrainerName != null ? Model.TrainerName.NameEn : "-")
+                    </div>
+                </div>
+
+                <div class="propertys">
+                    <label>Training Type :</label>
+                    <div class="propertys-value">
+                        @(Model.TrainingType != null ? Model.TrainingType.NameEn : "-")
+                    </div>
+                </div>
+
+
+                <div class="propertys">
+                    <label>Training Topics :</label>
+                    <div class="propertys-value">
+                        @(Model.TrainingTopic != null ? Model.TrainingTopic.NameEn : "-")
+                    </div>
+                </div>
+
+                <div class="propertys">
+                    <label>Training Status :</label>
+                    <div class="propertys-value">
+                        @(Model.TrainingStatus != null ? Model.TrainingStatus.NameEn : "-")
+                    </div>
+                </div>
+
+                <div class="propertys">
+                    <label>Training Result :</label>
+                    <div class="propertys-value">
+                        @(Model.TrainingResult != null ? Model.TrainingResult.NameEn : "-")
+                    </div>
+                </div>
+
+                <div class="propertys">
+                    <label>Comment:</label>
+                    <div class="propertys-value">
+                        @(Model.Comment != string.Empty ? Model.Comment : "-")
+                    </div>
+                </div>
+
+                <div class="propertys">
+                    <label>Evaluation Score:</label>
+                    <div class="propertys-value">
+                        @(Model.EvaluationScore != null ? Model.EvaluationScore : "-")
+                    </div>
+
+
+                </div>
+
+
+                <div class="propertys">
+                    <label>Final Presentation Date:</label>
+                    <div class="propertys-value">
+                        @(Model.FinalPresentationDate != DateTime.MinValue ? Model.FinalPresentationDate : "-")
+                    </div>
+
+
+                </div>
+                <div class="propertys">
+                    <label>Actual End Date:</label>
+                    <div class="propertys-value">
+                        @(Model.ActualEndDate != DateTime.MinValue ? Model.ActualEndDate : "-")
+                    </div>
+
+
+                </div>
+                @if (Model.EvaluationFile != null)
+                {
+                    <div class="propertys">
+                        <label>Evaluation File:</label>
+                        <div class="propertys-value">
+                            <a href="@Url.Action("ViewEvaluationFile", "Session", new { sessionId = Model.SessionId })" class="btn btn-info">View &nbsp;<i class="bi bi-table"></i></a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-warning propertys" role="alert">
+                        <label>Evaluation File:</label>
+                        <div class="propertys-value">
+                            No file Uploaded
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+
+
+
+
+            <div class="mt-3 d-flex justify-content-center pb-2">
+
+                <a asp-controller="Session" asp-action="Index" class="btn waves-effect waves-light btn btn-info hidden-sm-down text-white pb-2">Back to List</a>
+            </div>
+  </div>
+</div>
+    </div>
+
+
+ <link href="~/css/mainstyle.css" rel="stylesheet" />
+
+
+
+
+ 
+    
+@section Scripts
+    {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

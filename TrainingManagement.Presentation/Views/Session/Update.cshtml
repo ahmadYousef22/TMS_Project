@@ -1,0 +1,507 @@
+﻿@model SessionViewModel
+
+@{
+    ViewData["Title"] = "Update Sessions";
+}
+<link href="~/Design/css/style.css" rel="stylesheet" />
+<link href="~/css/select.css" rel="stylesheet" />
+
+<style>
+    i.far.fa-calendar {
+        position: absolute;
+        top: 57%;
+        right: 23px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #666;
+    }
+
+    .fa-calendar {
+        position: absolute;
+        right: 10px;
+        top: 73%;
+        transform: translateY(-55%);
+        pointer-events: none;
+    }
+
+    .date-input-container {
+        position: relative;
+    }
+
+        .date-input-container input[type="date"] {
+            padding-right: 25px;
+        }
+</style>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Courses</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index">Courses</a></li>
+            <li class="breadcrumb-item active">Update</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form id="session-entry-form">
+                    <div class="border p-4 mt-4">
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="custom-label"> Year </label>
+                                    <input id="year" type="text" class="form-select b-1" value="@Model.Year" disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <input type="hidden" id="edit-id" value="-1">
+                                    <label for="traineeName" class="custom-label">Trainee Name:  <span class="required-field"></span></label>
+                                    <input type="text" id="traineeName" name="traineeName" placeholder="Trainee Name" required class="form-control">
+                                    <p id="nameError" class="text-danger"></p>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="mb-3">
+                                    <label for="trainerName" class="custom-label">Trainer Name: <span class="required-field"></span></label>
+                                    <select asp-for="TrainerName" id="trainerName" name="selectedCode" class="form-select b-1">
+                                        <option value="">Select Trainer</option>
+                                        @foreach (var item in ViewBag.Trainers)
+                                        {
+                                            <option value="@item.Id">@item.NameEn</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="mb-3">
+                                    <label for="topic" class="custom-label">Training Topic: <span class="required-field"></span></label>
+                                    <select asp-for="TrainingTopic" id="topic" name="selectedCode" class="form-select b-1">
+                                        <option value="">Select Topic</option>
+                                        @foreach (var item in ViewBag.Topics)
+                                        {
+                                            <option value="@item.Id" data-topic-name="@item.NameEn">@item.NameEn</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3 ">
+                                    <label for="type" class="custom-label">Training Type: <span class="required-field"></span></label>
+                                    <select asp-for="TrainingType" id="type" name="selectedCode" class="form-select b-1">
+                                        <option value="">Select Type</option>
+                                        @foreach (var item in ViewBag.Types)
+                                        {
+                                            <option value="@item.Id">@item.NameEn</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="mb-3">
+                                    <label for="startDate" class="custom-label">Start Date: <span class="required-field"></span></label>
+                                    <input type="date" id="startDate" name="startDate" class="form-control" min="@DateTime.Now.ToString("yyyy-MM-dd")" placeholder="Select Start Date">
+                                    <i class="far fa-calendar" id="starxtDate"></i>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <div class="mb-3">
+                                    <label for="endDate" class="custom-label">End Date: <span class="required-field"></span></label>
+                                    <input type="date" id="endDate" name="endDate" class="form-control" min="@DateTime.Now.ToString("yyyy-MM-dd")" placeholder="Select End Date">
+                                    <i class="far fa-calendar" id="enxdDate"></i>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="col text-center">
+                                <button type="button" id="preview-button" class="btn btn-outline-secondary"> <i class="bi bi-person-plus-fill"></i> Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-body">
+
+                <table id="session-table" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Trainee Name</th>
+                            <th>Trainer Name</th>
+                            <th>Topic</th>
+                            <th>Type</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="col text-center">
+                    <button type="button" id="insert-button" class="btn waves-effect waves-light btn btn-info hidden-sm-down text-white">Save</button>
+                    <a asp-controller="Session" asp-action="Index" class="btn btn-secondary">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        flatpickr("#startDate", {
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            onChange: function (selectedDates, dateStr, instance) {
+                 flatpickr("#endDate", {
+                    minDate: dateStr,
+                });
+            },
+        });
+
+        flatpickr("#endDate", {
+            dateFormat: "Y-m-d",
+            minDate: "tomorrow",
+        });
+    });
+
+
+    $(document).ready(function () {
+
+        var sessionData = @Html.Raw(Json.Serialize(ViewBag.SessionsViewModel));
+        var trainersData = @Html.Raw(Json.Serialize(ViewBag.Trainers));
+        var topicsData = @Html.Raw(Json.Serialize(ViewBag.Topics));
+        var typesData = @Html.Raw(Json.Serialize(ViewBag.Types));
+
+        function getTrainerNameById(trainerId) {
+            for (var i = 0; i < trainersData.length; i++) {
+                if (trainersData[i].id === trainerId) {
+                    return trainersData[i].nameEn;
+                }
+            }
+            return "Trainer not found";
+        }
+
+        function getTopicNameById(topicId) {
+            for (var i = 0; i < topicsData.length; i++) {
+                if (topicsData[i].id === topicId) {
+                    return topicsData[i].nameEn;
+                }
+            }
+            return "Topic not found";
+        }
+
+        function getTypeNameById(typeId) {
+            for (var i = 0; i < typesData.length; i++) {
+                if (typesData[i].id === typeId) {
+                    return typesData[i].nameEn;
+                }
+            }
+            return "Type not found";
+        }
+        const deletedSessionIds = [];
+
+        function populateTable() {
+            const tableBody = $("#session-table tbody");
+            tableBody.empty();
+
+            sessionData.forEach((session, index) => {
+
+                if (!session.isDeleted) {
+                    const row = `
+                                                    <tr>
+                                                        <td>${session.traineeName}</td>
+                                                        <td data-trainer-id="${session.trainerNameId}">${getTrainerNameById(session.trainerNameId)}</td>
+                                                        <td data-topic-id="${session.trainingTopicId}">${getTopicNameById(session.trainingTopicId)}</td>
+                                                        <td data-type-id="${session.trainingTypeId}">${getTypeNameById(session.trainingTypeId)}</td>
+                                                        <td>${formatDate(new Date(session.startDate))}</td>
+                                                        <td>${formatDate(new Date(session.expectedEndDate))}</td>
+                                                        <td>
+                                                                                    <a type="button" class="edit-row-button btn-with-hand-cursor" data-toggle="tooltip" data-placement="top" title="Edit"> <i class="bi bi-pencil-fill text-black-50"></i> </a>
+                                                                            <a type="button" class="delete-row-button btn-with-hand-cursor" data-toggle="tooltip" data-placement="top" title="Delete"><i class="bi bi-trash text-black-50"></i> </a>
+                                                        </td>
+                                                    </tr>`;
+                    tableBody.append(row);
+                }
+            });
+        }
+
+
+
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        $("#session-table").on("click", ".edit-row-button", function () {
+            var rowIndex = $(this).closest("tr").index();
+            var session = sessionData[rowIndex];
+
+            $("#traineeName").val(session.traineeName);
+            $("#trainerName").val(session.trainerNameId);
+            $("#topic").val(session.trainingTopicId);
+            $("#type").val(session.trainingTypeId);
+
+            var startDate = new Date(session.startDate);
+            var endDate = new Date(session.expectedEndDate);
+
+            $("#startDate").val(formatDate(startDate));
+            $("#endDate").val(formatDate(endDate));
+            $("#edit-id").val(rowIndex);
+            $("#preview-button").text("Save");
+        });
+
+
+        $("#session-table").on("click", ".delete-row-button", function () {
+            var rowIndex = $(this).closest("tr").index();
+            var session = sessionData[rowIndex];
+
+            if (session.sessionId !== -1) {
+                deletedSessionIds.push(session.sessionId);
+            }
+
+            sessionData.splice(rowIndex, 1);
+
+            populateTable();
+        });
+        /////////////////////Validation////////
+
+        function validateName() {
+            var traineeName = $("#traineeName").val();
+            var nameRegex = /\d/;
+
+            if (nameRegex.test(traineeName)) {
+                $("#nameError").text("Name cannot contain numbers.");
+                return false;
+            } else {
+                $("#nameError").text("");
+                return true;
+            }
+        }
+
+        $("#traineeName").on("focusout", function () {
+            validateName();
+        });
+      function validateForm() {
+    var isValid = true;
+
+    if (areInputFieldsEmpty()) {
+        Swal.fire({
+            title: 'Warning!',
+            text: 'Please fill in all fields before adding or editing a row.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+        isValid = false;
+    } else {
+        var traineeName = $("#traineeName").val();
+        var trainerNameId = $("#trainerName").val();
+
+
+        var isDuplicate = sessionData.some(function (session) {
+            return session.traineeName === traineeName && session.trainerNameId === Number(trainerNameId);
+        });
+
+        //if (isDuplicate) {
+        //    Swal.fire({
+        //        title: 'Warning!',
+        //        text: 'A session with the same Trainee Name and Trainer Name already exists.',
+        //        icon: 'warning',
+        //    });
+        //    isValid = false;
+        //}
+    }
+
+    if (!validateName()) {
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+
+        $("#preview-button").click(function () {
+
+            if (!validateForm()) {
+                return;
+            }
+
+
+
+
+            var traineeName = $("#traineeName").val();
+            var trainerNameId = $("#trainerName").val();
+            var trainingTopicId = $("#topic").val();
+            var trainingTypeId = $("#type").val();
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            var Year = $("#year").val();
+            var editIndex = $("#edit-id").val();
+
+
+
+            if (editIndex === "-1") {
+                var newSession = {
+                    SessionId: -1,
+                    traineeName: traineeName,
+                    trainerNameId: Number(trainerNameId),
+                    trainingTopicId: Number(trainingTopicId),
+                    trainingTypeId: Number(trainingTypeId),
+                    startDate: startDate,
+                    expectedEndDate: endDate,
+                    year: Year
+                };
+                sessionData.push(newSession);
+            } else {
+                var editedSession = sessionData[editIndex];
+                editedSession.traineeName = traineeName;
+                editedSession.trainerNameId = Number(trainerNameId);
+                editedSession.trainingTopicId = Number(trainingTopicId);
+                editedSession.trainingTypeId = Number(trainingTypeId);
+                editedSession.startDate = startDate;
+                editedSession.year = Year;
+                editedSession.expectedEndDate = endDate;
+            }
+
+            clearForm();
+
+            populateTable();
+
+        });
+        /////
+        $("#insert-button").click(function () {
+            if (sessionData.length === 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'No data to add.',
+                });
+                return; // Exit
+            }
+            $.ajax({
+                type: "POST",
+                async: true,
+                url: "/api/SessionApi/DeleteList",
+                contentType: "application/json",
+                data: JSON.stringify(deletedSessionIds),
+                success: function (data) {
+                    populateTable();
+                },
+            });
+
+            $.ajax({
+                url: "/Session/Update",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(sessionData),
+                success: function (response) {
+                    var message = '';
+
+                    if (response.success) {
+                        message = 'Data inserted successfully.';
+                    }
+                    else {
+                        message = 'Data insertion failed. Please check your input.';
+                        console.error(xhr, status, error);
+                    }
+
+                    // Check if any sessions were deleted
+                    if (deletedSessionIds.length > 0) {
+                        message += ' Some sessions were deleted.';
+                    }
+
+                    Swal.fire({
+                        icon: response.success ? 'success' : 'warning',
+                        title: response.success ? 'Success' : 'Warning',
+                        text: message,
+                    }).then(function (result) {
+                        if (result.isConfirmed) {
+                            window.location.href = "/Session/Index";
+                        }
+                    });
+
+                    populateTable();
+                },
+                error: function (xhr, status, error) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Warning',
+                        text: 'Data insertion failed. Please check your input.',
+                    });
+                    console.error(xhr, status, error);
+                }
+            });
+        });
+        /////
+
+
+
+
+        function areInputFieldsEmpty() {
+            return (
+                $("#traineeName").val() === '' ||
+                $("#trainerName").val() === '' ||
+                $("#topic").val() === '' ||
+                $("#type").val() === '' ||
+                $("#startDate").val() === '' ||
+                $("#endDate").val() === ''
+            );
+        }
+
+        function clearForm() {
+            $("#traineeName").val('');
+            $("#trainerName").val('');
+            $("#topic").val('');
+            $("#type").val('');
+            $("#startDate").val('');
+            $("#endDate").val('');
+            $("#edit-id").val("-1");
+            $("#preview-button").text("Add");
+        }
+
+        populateTable();
+    });
+</script>

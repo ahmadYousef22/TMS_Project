@@ -1,0 +1,469 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>ba51a75c-5352-470e-b467-b3162b8f2d5e</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\Design\assets\node_modules\**" />
+    <Content Remove="wwwroot\Design\assets\node_modules\**" />
+    <EmbeddedResource Remove="wwwroot\Design\assets\node_modules\**" />
+    <None Remove="wwwroot\Design\assets\node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\MappingProfile.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="wwwroot\MappingProfile.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="ClosedXML" Version="0.102.1" />
+    <PackageReference Include="EPPlus" Version="5.0.4" />
+    <PackageReference Include="ExcelDataReader" Version="3.6.0" />
+    <PackageReference Include="Karambolo.Extensions.Logging.File" Version="3.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Serilog" Version="3.0.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="System.CodeDom" Version="5.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TrainingManagment.Domain\TrainingManagement.Domain.csproj" />
+    <ProjectReference Include="..\TrainingManagment.Repository\TrainingManagment.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\DesignTemplate\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\DesignTemplate\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\DesignTemplate\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\DesignTemplate\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\DesignTemplate\css\bootstrap.css.map" />
+    <None Include="wwwroot\DesignTemplate\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\DesignTemplate\fonts\Flaticon.svg" />
+    <None Include="wwwroot\DesignTemplate\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\DesignTemplate\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\DesignTemplate\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\DesignTemplate\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\DesignTemplate\fonts\_flaticon.scss" />
+    <None Include="wwwroot\DesignTemplate\images\.DS_Store" />
+    <None Include="wwwroot\DesignTemplate\images\layout_img\.DS_Store" />
+    <None Include="wwwroot\DesignTemplate\js\analyser.js" />
+    <None Include="wwwroot\DesignTemplate\js\animate.js" />
+    <None Include="wwwroot\DesignTemplate\js\bootstrap-select.js" />
+    <None Include="wwwroot\DesignTemplate\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\DesignTemplate\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\DesignTemplate\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\DesignTemplate\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\DesignTemplate\js\bootstrap.js" />
+    <None Include="wwwroot\DesignTemplate\js\bootstrap.js.map" />
+    <None Include="wwwroot\DesignTemplate\js\bootstrap.min.js" />
+    <None Include="wwwroot\DesignTemplate\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\DesignTemplate\js\calendar.js" />
+    <None Include="wwwroot\DesignTemplate\js\calendar.min.js" />
+    <None Include="wwwroot\DesignTemplate\js\Chart.bundle.js" />
+    <None Include="wwwroot\DesignTemplate\js\Chart.bundle.min.js" />
+    <None Include="wwwroot\DesignTemplate\js\Chart.js" />
+    <None Include="wwwroot\DesignTemplate\js\Chart.min.js" />
+    <None Include="wwwroot\DesignTemplate\js\chart_custom_style1.js" />
+    <None Include="wwwroot\DesignTemplate\js\chart_custom_style2.js" />
+    <None Include="wwwroot\DesignTemplate\js\custom.js" />
+    <None Include="wwwroot\DesignTemplate\js\custom_chart.js" />
+    <None Include="wwwroot\DesignTemplate\js\jquery-3.3.1.min.js" />
+    <None Include="wwwroot\DesignTemplate\js\jquery.fancybox.js" />
+    <None Include="wwwroot\DesignTemplate\js\jquery.fancybox.min.js" />
+    <None Include="wwwroot\DesignTemplate\js\jquery.min.js" />
+    <None Include="wwwroot\DesignTemplate\js\owl.carousel.js" />
+    <None Include="wwwroot\DesignTemplate\js\perfect-scrollbar.min.js" />
+    <None Include="wwwroot\DesignTemplate\js\popper.min.js" />
+    <None Include="wwwroot\DesignTemplate\js\semantic.min.js" />
+    <None Include="wwwroot\DesignTemplate\js\utils.js" />
+    <None Include="wwwroot\DesignTemplate\modules\.DS_Store" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-3d.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-animation.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-api-annotations.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-api-rules.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-api.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-area.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-area3d.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-boxplot.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-bubble.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-bubblepie.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-calendar.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-chord.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-core.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-csv.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-debug.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-dragging.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-errorbars.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-export.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-gauge.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-grid.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-guide.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-hbar.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-hbar3d.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-hbubble.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-hbullet.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-hfunnel.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-history.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-hscatter.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-legend.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-line.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-line3d.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-afg.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-ago.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-alb.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-and.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-are.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-arg.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-arm.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-aus.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-aut.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-aze.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-bdi.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-bel.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-ben.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-bfa.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-bgr.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-bih.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-blr.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-bol.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-bra.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-brn.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-btn.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-bwa.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-caf.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-can.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-che.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-chl.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-chn.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-civ.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-cmr.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-cod.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-cog.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-col.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-cri.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-cub.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-cyp.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-cze.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-deu.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-dnk.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-ecu.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-egy.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-esp.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-espL2.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-est.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-eth.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-fin.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-fra.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-fraL2.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-gab.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-gbr.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-gbrL2.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-geojson.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-gha.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-gmb.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-gnb.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-grc.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-gtm.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-guf.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-guy.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-hrv.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-hun.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-ind.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-irl.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-irn.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-isl.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-isr.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-ita.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-jpn.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-kaz.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-ken.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-kor.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-kwt.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-lao.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-lbr.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-lie.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-ltu.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-lux.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-lva.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-mda.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-mex.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-mkd.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-mne.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-moz.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-nam.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-ncl.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-nga.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-nld.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-nor.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-nzl.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-omn.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-pak.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-pan.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-per.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-phl.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-png.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-pol.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-prt.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-qat.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-rou.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-rus.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-rwa.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-sen.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-slv.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-srb.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-sur.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-svk.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-svn.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-swe.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-tha.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-tjk.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-topojson.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-tun.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-tur.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-twn.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-uga.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-ukr.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-ury.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_ak.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_al.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_ar.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_az.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_ca.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_co.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_ct.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_dc.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_de.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_fl.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_ga.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_hi.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_ia.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_id.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_il.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_in.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_ks.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_ky.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_la.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_ma.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_md.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_me.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_mi.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_mn.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_mo.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_ms.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_mt.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_nc.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_nd.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_ne.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_nh.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_nj.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_nm.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_nv.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_ny.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_oh.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_ok.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_or.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_pa.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_ri.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_sc.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_sd.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_tn.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_tx.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_ut.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_va.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_vt.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_wa.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_wi.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_wv.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-usa_wy.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-uzb.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-ven.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-vnm.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-world-continents.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-world-countries.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-yem.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-zaf.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-zmb.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps-zwe.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-maps.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-navpie.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-nestedpie.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-objects.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-pareto.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-patterns.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-piano.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-pie.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-pie3d.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-populationpyramid.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-preview.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-r.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-radar.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-range.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-rankflow.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-refresh.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-scalemarkers.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-scatter.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-scroll.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-selection-tool.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-selection.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-stock.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-stream.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-svg-simple-selection.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-toolbar3d.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-tooltip.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-treemap.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-varea.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-vbar.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-vbar3d.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-vbullet.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-venn.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-vfunnel.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-vline.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-waterfall.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-wordcloud.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-xy.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-yx.min.js" />
+    <None Include="wwwroot\DesignTemplate\modules\zingchart-zoom.min.js" />
+    <None Include="wwwroot\Design\assets\.DS_Store" />
+    <None Include="wwwroot\Design\assets\images\.DS_Store" />
+    <None Include="wwwroot\Design\assets\images\big\Thumbs.db" />
+    <None Include="wwwroot\Design\css\.DS_Store" />
+    <None Include="wwwroot\Design\js\.DS_Store" />
+    <None Include="wwwroot\Design\js\custom.js" />
+    <None Include="wwwroot\Design\js\custom.min.js" />
+    <None Include="wwwroot\Design\js\dashboard1.js" />
+    <None Include="wwwroot\Design\js\flot-data.js" />
+    <None Include="wwwroot\Design\js\jquery.slimscroll.js" />
+    <None Include="wwwroot\Design\js\perfect-scrollbar.jquery.min.js" />
+    <None Include="wwwroot\Design\js\sidebarmenu.js" />
+    <None Include="wwwroot\Design\js\waves.js" />
+    <None Include="wwwroot\Design\scss\.DS_Store" />
+    <None Include="wwwroot\Design\scss\app.scss" />
+    <None Include="wwwroot\Design\scss\colors\default.scss" />
+    <None Include="wwwroot\Design\scss\grid.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\less\animated.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\less\bordered-pulled.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\less\core.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\less\fixed-width.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\less\font-awesome.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\less\icons.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\less\larger.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\less\list.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\less\mixins.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\less\path.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\less\rotated-flipped.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\less\screen-reader.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\less\stacked.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\less\variables.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\.gitignore" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\.npmignore" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\less\animated.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\less\bordered-pulled.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\less\core.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\less\extras.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\less\fixed-width.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\less\font-awesome.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\less\icons.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\less\larger.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\less\list.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\less\mixins.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\less\path.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\less\rotated-flipped.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\less\spinning.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\less\stacked.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\less\variables.less" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\scss\font-awesome.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\scss\_animated.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\scss\_bordered-pulled.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\scss\_core.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\scss\_extras.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\scss\_fixed-width.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\scss\_icons.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\scss\_larger.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\scss\_list.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\scss\_mixins.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\scss\_path.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\scss\_rotated-flipped.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\scss\_spinning.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\scss\_stacked.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\old\scss\_variables.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\scss\font-awesome.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\scss\_animated.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\scss\_bordered-pulled.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\scss\_core.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\scss\_fixed-width.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\scss\_icons.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\scss\_larger.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\scss\_list.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\scss\_mixins.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\scss\_path.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\scss\_rotated-flipped.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\scss\_screen-reader.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\scss\_stacked.scss" />
+    <None Include="wwwroot\Design\scss\icons\font-awesome\scss\_variables.scss" />
+    <None Include="wwwroot\Design\scss\pages\bootstrap-switch.scss" />
+    <None Include="wwwroot\Design\scss\pages\breadcrumb-page.scss" />
+    <None Include="wwwroot\Design\scss\pages\button-page.scss" />
+    <None Include="wwwroot\Design\scss\pages\card-page.scss" />
+    <None Include="wwwroot\Design\scss\pages\chat-app-page.scss" />
+    <None Include="wwwroot\Design\scss\pages\common.scss" />
+    <None Include="wwwroot\Design\scss\pages\contact-app-page.scss" />
+    <None Include="wwwroot\Design\scss\pages\dashboard1.scss" />
+    <None Include="wwwroot\Design\scss\pages\easy-pie-chart.scss" />
+    <None Include="wwwroot\Design\scss\pages\error-pages.scss" />
+    <None Include="wwwroot\Design\scss\pages\file-upload.scss" />
+    <None Include="wwwroot\Design\scss\pages\float-chart.scss" />
+    <None Include="wwwroot\Design\scss\pages\floating-label.scss" />
+    <None Include="wwwroot\Design\scss\pages\footable-page.scss" />
+    <None Include="wwwroot\Design\scss\pages\form-icheck.scss" />
+    <None Include="wwwroot\Design\scss\pages\form-pages.scss" />
+    <None Include="wwwroot\Design\scss\pages\google-vector-map.scss" />
+    <None Include="wwwroot\Design\scss\pages\icon-page.scss" />
+    <None Include="wwwroot\Design\scss\pages\other-pages.scss" />
+    <None Include="wwwroot\Design\scss\pages\pages.scss" />
+    <None Include="wwwroot\Design\scss\pages\pagination.scss" />
+    <None Include="wwwroot\Design\scss\pages\perfect-scrollbar.scss" />
+    <None Include="wwwroot\Design\scss\pages\pricing-page.scss" />
+    <None Include="wwwroot\Design\scss\pages\stylish-tooltip.scss" />
+    <None Include="wwwroot\Design\scss\pages\table-pages.scss" />
+    <None Include="wwwroot\Design\scss\responsive.scss" />
+    <None Include="wwwroot\Design\scss\sidebar.scss" />
+    <None Include="wwwroot\Design\scss\style.scss" />
+    <None Include="wwwroot\Design\scss\variable.scss" />
+    <None Include="wwwroot\Design\scss\widgets\blog.scss" />
+    <None Include="wwwroot\Design\scss\widgets\comment.scss" />
+    <None Include="wwwroot\Design\scss\widgets\common-widget.scss" />
+    <None Include="wwwroot\Design\scss\widgets\feed.scss" />
+    <None Include="wwwroot\Design\scss\widgets\msg-box.scss" />
+    <None Include="wwwroot\Design\scss\widgets\profile.scss" />
+    <None Include="wwwroot\Design\scss\widgets\topbar-mail.scss" />
+    <None Include="wwwroot\Design\scss\widgets\widgets.scss" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://json.schemastore.org/asmdef.json" /></VisualStudio></ProjectExtensions>
+
+</Project>

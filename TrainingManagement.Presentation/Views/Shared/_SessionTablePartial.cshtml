@@ -1,0 +1,68 @@
+﻿@model  List< SessionViewModel>
+
+<table id="list" class="table table-bordered mt-4">
+    <thead>
+        <tr>
+            <th>Year</th>
+            <th>Trainee Name</th>
+            <th>Trainer Name</th>
+            <th>Training Type</th>
+            <th>Start Date</th>
+            <th>Expected End Date</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var session in Model)
+            {
+                <tr>
+                    <td>@session.Year</td>
+                    <td>@session.TraineeName</td>
+                    <td>@session.TrainerName.NameEn</td>
+                    <td>@session.TrainingType.NameEn</td>
+                    <td>@session.StartDate.ToString("yyyy-MM-dd")</td>
+                    <td>@session.ExpectedEndDate.ToString("yyyy-MM-dd")</td>
+                    <td>@session.TrainingStatus.NameEn</td>
+
+                    <td>
+                        <div class="w-60 btn-group d-inline mr-2" role="group">
+                            <a asp-controller="Session" asp-action="Details" class="mx-2 text-decoration-none"
+                       asp-route-id="@session.SessionId">
+                                <i class="bi bi-eye-fill text-black-50"></i>
+                            </a>
+                            <a asp-controller="Session" asp-action="UpdateSession" class="mx-2 text-decoration-none"
+                       asp-route-id="@session.SessionId">
+                                <i class="bi bi-pencil-fill text-black-50"></i>
+                            </a>
+
+                            <a asp-controller="Session" asp-action="Delete" class="mx-2 text-decoration-none"
+                       asp-route-id="@session.SessionId">
+                                <i class="bi bi-trash text-black-50"></i>
+                            </a>
+
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+      <script type="text/javascript">
+             $(document).ready(function () {
+                $('#list').DataTable({
+                    "paging": true,
+                    "pageLength": 10,
+                    "searching": false,
+                    "ordering": true,
+                    "orderClasses": false,
+                    "language": {
+                        "order": [],
+                    },
+                });
+            });
+     </script>
+ 

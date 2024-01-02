@@ -1,0 +1,505 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+ <link href="~/Design/css/style.css" rel="stylesheet" />
+<link href="~/css/select.css" rel="stylesheet" />
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>Dashboard</h2>
+        </div>
+    </div>
+</div>
+
+
+<div class="row column1">
+    @if (ViewBag.AllTrainees != 0)
+    {
+
+        <div class="col-md-6 col-lg-3">
+
+
+            <div class="full counter_section margin_bottom_30 yellow_bg">
+                <div class="couter_icon">
+                    <div>
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <p class="total_no text-black-50"> @ViewBag.AllTrainees</p>
+                        <p class="head_couter text-light">All Trainees</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    }
+
+
+    @if (ViewBag.ActiveTrainees != 0)
+    {
+
+
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30 blue1_bg">
+                <div class="couter_icon">
+                    <div>
+                        <i class="bi bi-person-check-fill"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <p class="total_no text-black-50">@ViewBag.ActiveTrainees</p>
+                        <p class="head_couter text-light">
+                            Active Trainees
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>}
+
+
+    @if (ViewBag.FinishedTrainees != 0)
+    {
+
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30 green_bg">
+                <div class="couter_icon">
+                    <div>
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <p class="total_no text-black-50"> @ViewBag.FinishedTrainees</p>
+                        <p class="head_couter text-light">
+                            Finished Trainees
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>}
+
+    @if (ViewBag.PendingTrainees != 0)
+    {
+
+
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30 red_bg">
+                <div class="couter_icon">
+                    <div>
+                        <i class="bi bi-person-fill-dash"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <p class="total_no text-black-50">@ViewBag.PendingTrainees</p>
+                        <p class="head_couter text-light">
+                            Pending Trainees
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>}
+</div>
+
+
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center col-12">
+                    <div class="col-md-4">
+                        <!-- Adjust the column size as needed -->
+                        <label for="selectedYear">Year</label>
+                        <select class="form-select b-0" id="selectedYear">
+
+                            @foreach (var year in ViewBag.Years)
+                            {
+                                <option value="@year.NameEn">@year.NameEn</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="selectedStatus">Status</label>
+                        <select class="form-select b-0" id="selectedStatus">
+                            <option value="">all</option>
+
+                            @foreach (var status in ViewBag.Status)
+                            {
+                                <option value="@status.NameEn">@status.NameEn</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="d-flex">
+                <div class="col-6">
+                    <h5 class="card-title mb-0">Trainee Counts by Topic Chart</h5>
+                    <canvas id="barChart" style="height: 280px;"></canvas>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex">
+                        <div style="max-width: 100%;">
+                            <h5 class="card-title mb-0">Trainees Acceptance Rate</h5>
+                            <div style="max-width: 100%;">
+                                <canvas id="pieChart" style="height: 280px;" class="m-t-10"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex" style="margin-top:100px">
+                <div class="col-6">
+                    <h5 class="card-title mb-0">Training Types</h5>
+                    <canvas id="TypeChart" style="height: 280px;"></canvas>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex">
+                        <div style="max-width: 100%;">
+                            <h5 class="card-title mb-0">Training Result</h5>
+                            <div style="max-width: 100%;">
+                                <canvas id="ResultChart" style="height: 280px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+@*<script>
+        var yearDropdown = document.getElementById("selectedYear");
+        var statusSelect = document.getElementById("selectedStatus");
+
+        var currentDate = new Date();
+        var defaultYear = currentDate.getFullYear();
+
+        yearDropdown.value = defaultYear;
+
+        loadData(defaultYear, statusSelect);
+
+        yearDropdown.addEventListener("change", function () {
+            var selectedYear = yearDropdown.value;
+            loadData(selectedYear, statusSelect);
+        });
+
+        statusSelect.addEventListener("change", function () {
+            var selectedStatus = statusSelect.value;
+            loadData(selectedYear, selectedStatus);
+        });
+
+        var AllTrainees;
+        var WorkedTrainees;
+        var TopicsCount;
+        var TrainersCount;
+
+        function loadData(selectedYear, selectedStatus) {
+            $.ajax({
+                url: '/Home/CardData',
+                method: 'GET',
+                contentType: 'application/json',
+                data: { currentYear: selectedYear, status: selectedStatus },
+                success: function (Carddata) {
+                    AllTrainees = Carddata.AllTrainees;
+                    WorkedTrainees = Carddata.WorkedTrainees;
+                    TopicsCount = Carddata.TopicsCount;
+                    TrainersCount = Carddata.TrainersCount;
+                },
+                error: function (error) {
+                    console.error('Error fetching data:', error);
+                }
+            });
+        }
+
+
+    </script>*@
+
+
+
+
+
+
+
+@*    ==========================*@
+
+
+<script>
+    Chart.defaults.global.defaultFontSize = 14;
+    Chart.defaults.global.defaultFontColor = '#333';
+
+    var barCtx = document.getElementById("barChart").getContext("2d");
+    var pieCtx = document.getElementById("pieChart").getContext("2d");
+    var typeCtx = document.getElementById("TypeChart").getContext("2d");
+    var resultCtx = document.getElementById('ResultChart').getContext('2d');
+
+    var yearDropdown = document.getElementById("selectedYear");
+    var statusSelect = document.getElementById("selectedStatus");
+
+    function loadData(selectedYear, selectedStatus) {
+        var Filter = {
+            currentYear: selectedYear,
+            status: selectedStatus
+        };
+
+        $.ajax({
+            url: '/Home/Index2',
+            method: 'GET',
+            contentType: 'application/json',
+            data: Filter,
+            success: function (data) {
+                if (data.topics.length === 0) {
+                    renderBarChart([], "No sessions found in this year");
+                } else {
+                    renderBarChart(data.topics, "Trainee Count by Topic");
+                }
+                renderPieChart(data.acceptedCount, data.rejectedCount);
+                renderTypeChart(data.types, "Training Type");
+                renderResultChart(data.tresult);
+            },
+            error: function (error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    }
+
+    var currentDate = new Date();
+    var defaultYear = currentDate.getFullYear();
+
+    yearDropdown.value = defaultYear;
+
+    loadData(defaultYear, '');
+
+    yearDropdown.addEventListener("change", function () {
+        var selectedYear = yearDropdown.value;
+
+        loadData(selectedYear, statusSelect.value);
+    });
+
+    statusSelect.addEventListener("change", function () {
+        var selectedStatus = statusSelect.value;
+
+        loadData(yearDropdown.value, selectedStatus);
+    });
+
+
+
+
+    function renderBarChart(topics, title) {
+        var labels = topics.map(function (topic) {
+            return topic.topic;
+        });
+
+        var data = topics.map(function (topic) {
+            return topic.traineeCount;
+        });
+
+        var barData = {
+            labels: labels,
+            datasets: [{
+                label: title,
+                data: data,
+                backgroundColor: [
+                    "#eceff1",
+                    "#24d2b5",
+                    "#6772e5",
+                    "#A6BB8D",
+                    "#9DB2BF",
+                    "#007580",
+                    "#59886B",
+                    "#DAC0A3",
+                    "#F39C12",
+                    "#D35400"
+                ],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        if (window.barChart && typeof window.barChart.destroy === 'function') {
+            window.barChart.destroy();
+        }
+        var minDataValue = Math.min.apply(null, barData);
+
+        window.barChart = new Chart(barCtx, {
+            type: 'bar',
+            data: barData,
+
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1
+                        }
+                    }]
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: title
+                    }
+                }
+            }
+        });
+    }
+
+    function renderTypeChart(topics, title) {
+        var labels = topics.map(function (topic) {
+            return topic.type;
+        });
+
+        var data = topics.map(function (topic) {
+            return topic.traineeCount;
+        });
+
+        var barData = {
+            labels: labels,
+            datasets: [{
+                label: title,
+                data: data,
+                backgroundColor: [
+                    "#4CAF50",  // Green
+                    "#2196F3",  // Blue
+                    "#FF9800",  // Orange
+                    "#E91E63",  // Pink
+                    "#795548",  // Brown
+                    "#9C27B0",  // Purple
+                    "#FF5722",  // Deep Orange
+                    "#00BCD4",  // Cyan
+                    "#FFEB3B",  // Yellow
+                    "#607D8B"   // Blue Grey
+                ],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        if (window.TypeChart && typeof window.TypeChart.destroy === 'function') {
+            window.TypeChart.destroy();
+        }
+        var minDataValue = Math.min.apply(null, barData);
+
+        window.TypeChart = new Chart(typeCtx, {
+            type: 'bar',
+            data: barData,
+
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1
+                        }
+                    }]
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: title
+                    }
+                }
+            }
+        });
+    }
+
+
+    function renderPieChart(acceptedCount, rejectedCount) {
+        var total = acceptedCount + rejectedCount;
+        var acceptedPercentage = ((acceptedCount / total) * 100).toFixed(2);
+        var rejectedPercentage = ((rejectedCount / total) * 100).toFixed(2);
+
+        var pieData = {
+            labels: ["Accepted (" + acceptedPercentage + "%)", "Rejected (" + rejectedPercentage + "%)"],
+            datasets: [{
+                data: [acceptedCount, rejectedCount],
+                backgroundColor: ["#eceff1", "#6772e5"],
+            }],
+        };
+        if (window.pieChart && typeof window.pieChart.destroy === 'function') {
+            window.pieChart.destroy();
+        }
+
+        window.pieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: pieData,
+            options: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        fontSize: 14,
+                        fontColor: '#333'
+                    }
+                }
+            }
+        });
+    }
+
+    function renderResultChart(results) {
+        var labels = results.map(result => result.result);
+        var counts = results.map(result => result.traineeCount);
+
+        var pieData = {
+            labels: labels,
+            datasets: [{
+                data: counts, // use the counts array instead of filling with 1
+                backgroundColor: ["#427D9D", "#ECE3CE", "#232D3F", "#005B41", "#ECE3CE", "#FF9800"],
+            }],
+        };
+
+        if (window.ResultChart && typeof window.ResultChart.destroy === 'function') {
+            window.ResultChart.destroy();
+        }
+
+        window.ResultChart = new Chart(resultCtx, {
+            type: 'pie',
+            data: pieData,
+            options: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        fontSize: 14,
+                        fontColor: '#333'
+                    }
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var label = data.labels[tooltipItem.index];
+                            var count = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                            return label + ': ' + count + ' trainees';
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+
+
+
+
+
+</script>
+
+
+
+
+

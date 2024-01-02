@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet" targetNamespace="http://tempuri.org/DataSet.xsd" xmlns:mstns="http://tempuri.org/DataSet.xsd" xmlns="http://tempuri.org/DataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DataSet" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Sessions" msprop:Generator_RowClassName="SessionsRow" msprop:Generator_RowEvHandlerName="SessionsRowChangeEventHandler" msprop:Generator_RowDeletedName="SessionsRowDeleted" msprop:Generator_RowDeletingName="SessionsRowDeleting" msprop:Generator_RowEvArgName="SessionsRowChangeEvent" msprop:Generator_TablePropName="Sessions" msprop:Generator_RowChangedName="SessionsRowChanged" msprop:Generator_UserTableName="Sessions" msprop:Generator_RowChangingName="SessionsRowChanging" msprop:Generator_TableClassName="SessionsDataTable" msprop:Generator_TableVarName="tableSessions">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SessionId" msdata:AutoIncrementSeed="1" msprop:Generator_UserColumnName="SessionId" msprop:Generator_ColumnPropNameInTable="SessionIdColumn" msprop:Generator_ColumnPropNameInRow="SessionId" msprop:Generator_ColumnVarNameInTable="columnSessionId" type="xs:int" minOccurs="0" />
+              <xs:element name="TrainingTopic" msprop:Generator_UserColumnName="TrainingTopic" msprop:Generator_ColumnPropNameInTable="TrainingTopicColumn" msprop:Generator_ColumnPropNameInRow="TrainingTopic" msprop:Generator_ColumnVarNameInTable="columnTrainingTopic" type="xs:string" minOccurs="0" />
+              <xs:element name="TrainingStatus" msdata:Caption="Training Status" msprop:Generator_UserColumnName="TrainingStatus" msprop:Generator_ColumnPropNameInTable="TrainingStatusColumn" msprop:Generator_ColumnPropNameInRow="TrainingStatus" msprop:Generator_ColumnVarNameInTable="columnTrainingStatus" type="xs:string" minOccurs="0" />
+              <xs:element name="TrainingType" msprop:Generator_UserColumnName="TrainingType" msprop:Generator_ColumnPropNameInTable="TrainingTypeColumn" msprop:Generator_ColumnPropNameInRow="TrainingType" msprop:Generator_ColumnVarNameInTable="columnTrainingType" type="xs:string" minOccurs="0" />
+              <xs:element name="TrainerName" msprop:Generator_UserColumnName="TrainerName" msprop:Generator_ColumnPropNameInTable="TrainerNameColumn" msprop:Generator_ColumnPropNameInRow="TrainerName" msprop:Generator_ColumnVarNameInTable="columnTrainerName" type="xs:string" minOccurs="0" />
+              <xs:element name="TraineeName" msprop:Generator_UserColumnName="TraineeName" msprop:Generator_ColumnPropNameInTable="TraineeNameColumn" msprop:Generator_ColumnPropNameInRow="TraineeName" msprop:Generator_ColumnVarNameInTable="columnTraineeName" type="xs:string" minOccurs="0" />
+              <xs:element name="StartDate" msprop:Generator_UserColumnName="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" type="xs:string" minOccurs="0" />
+              <xs:element name="ExpectedEndDate" msprop:Generator_UserColumnName="ExpectedEndDate" msprop:Generator_ColumnPropNameInTable="ExpectedEndDateColumn" msprop:Generator_ColumnPropNameInRow="ExpectedEndDate" msprop:Generator_ColumnVarNameInTable="columnExpectedEndDate" type="xs:string" minOccurs="0" />
+              <xs:element name="AcctualEndDate" msprop:Generator_UserColumnName="AcctualEndDate" msprop:Generator_ColumnPropNameInTable="AcctualEndDateColumn" msprop:Generator_ColumnPropNameInRow="AcctualEndDate" msprop:Generator_ColumnVarNameInTable="columnAcctualEndDate" type="xs:string" minOccurs="0" />
+              <xs:element name="FinalPresintationDate" msprop:Generator_UserColumnName="FinalPresintationDate" msprop:Generator_ColumnPropNameInTable="FinalPresintationDateColumn" msprop:Generator_ColumnPropNameInRow="FinalPresintationDate" msprop:Generator_ColumnVarNameInTable="columnFinalPresintationDate" type="xs:string" minOccurs="0" />
+              <xs:element name="EvaluationScore" msprop:Generator_UserColumnName="EvaluationScore" msprop:Generator_ColumnPropNameInTable="EvaluationScoreColumn" msprop:Generator_ColumnPropNameInRow="EvaluationScore" msprop:Generator_ColumnVarNameInTable="columnEvaluationScore" type="xs:double" minOccurs="0" />
+              <xs:element name="TrainingResult" msprop:Generator_UserColumnName="TrainingResult" msprop:Generator_ColumnPropNameInTable="TrainingResultColumn" msprop:Generator_ColumnPropNameInRow="TrainingResult" msprop:Generator_ColumnVarNameInTable="columnTrainingResult" type="xs:string" minOccurs="0" />
+              <xs:element name="Comments" msprop:Generator_UserColumnName="Comments" msprop:Generator_ColumnPropNameInTable="CommentsColumn" msprop:Generator_ColumnPropNameInRow="Comments" msprop:Generator_ColumnVarNameInTable="columnComments" type="xs:string" minOccurs="0" />
+              <xs:element name="Year" msprop:Generator_ColumnPropNameInRow="Year" msprop:Generator_ColumnPropNameInTable="YearColumn" msprop:Generator_ColumnVarNameInTable="columnYear" msprop:Generator_UserColumnName="Year" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

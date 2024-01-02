@@ -1,0 +1,169 @@
+﻿@page
+@model LoginModel
+@{
+    Layout = "";
+}
+
+<!--<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />-->
+<!-- site css -->
+<!--<link rel="stylesheet" href="/DesignTemplate/style.css" />-->
+<!-- responsive css -->
+<!--<link rel="stylesheet" href="/DesignTemplate/css/responsive.css" />-->
+<!-- color css -->
+<!--<link rel="stylesheet" href="/DesignTemplate/css/" />-->
+<!-- select bootstrap -->
+<!--<link rel="stylesheet" href="DesignTemplate/css/bootstrap-select.css" />-->
+<!-- scrollbar css -->
+<!--<link rel="stylesheet" href="DesignTemplate/css/perfect-scrollbar.css" />-->
+<!-- calendar file css -->
+<!--<link rel="stylesheet" href="DesignTemplate/js/semantic.min.css" />
+    <style>
+        .logo-img {
+            width: 360px;
+            height: 200px;
+        }
+    </style>
+    <title>TMS-Login</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Design/assets/images/favicon.png">
+
+</head>
+<body>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+<!--<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="text-center">
+                <img src="~/images/logo.png" class="img-fluid" alt="TecProccess" width="360" height="200" />
+            </div>
+            <form id="account" method="post" class="mt-4">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label for="InputEmail">Email</label>
+                    <input type="email" asp-for="Input.Email" id="InputEmail" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="InputPassword">Password</label>
+                    <input type="password" asp-for="Input.Password" id="InputPassword" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>-->
+<!-- You can uncomment the following lines if you want to include a "Remember Me" checkbox -->
+<!--<div class="form-group form-check">
+                    <input type="checkbox" asp-for="Input.RememberMe" class="form-check-input" id="InputRememberMe" />
+                    <label class="form-check-label" for="InputRememberMe">Remember Me</label>
+                </div>
+
+                <div class="form-group text-center mt-4">
+                    <button type="submit" class="btn btn-outline-primary">Log in</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>-->
+<!--</body>
+</html>-->
+<!-- basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- mobile metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<!-- site metas -->
+<title>TMS - Login</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- site icon -->
+<!-- bootstrap css -->
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/DesignTemplate/css/bootstrap.min.css" />
+<!-- site css -->
+<link rel="stylesheet" href="~/DesignTemplate/style.css" />
+<!-- responsive css -->
+<link rel="stylesheet" href="~/DesignTemplate/css/responsive.css" />
+<!-- color css -->
+<link rel="stylesheet" href="~/DesignTemplate/css/colors.css" />
+<!-- select bootstrap -->
+<link rel="stylesheet" href="~/DesignTemplate/css/bootstrap-select.css" />
+<!-- scrollbar css -->
+<link rel="stylesheet" href="~/DesignTemplate/css/perfect-scrollbar.css" />
+<!-- custom css -->
+<link rel="stylesheet" href="~/DesignTemplate/css/custom.css" />
+<!-- calendar file css -->
+<link rel="stylesheet" href="~/DesignTemplate/js/semantic.min.css" />
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<div class="inner_page login">
+    <div class="full_container">
+        <div class="container">
+            <div class="center verticle_center full_height">
+                <div class="login_section">
+                    <div class="logo_login">
+                        <div class="center">
+                            @*<img width="210" src="images/logo/logo.png" alt="#" />*@
+                            @*<img src="~/images/logo.png" class="img-fluid rounded-3" alt="TecProccess" width="210" height="310" />*@
+                        </div>
+                    </div>
+                    <div class="login_form">
+                        <form id="account" method="post" class="mt-4">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <fieldset>
+                                <div class="field">
+                                    <label class="label_field" for="InputEmail">Email</label>
+                                    <input required type="email" asp-for="Input.Email" id="InputEmail" class="form-control" placeholder="E-mail" />
+                                    <span asp-validation-for="Input.Email" class="text-danger" placeholder="E-mail"></span>
+                                </div>
+                                <div class="field mt-3">
+                                    <label class="label_field" for="InputPassword">Password</label>
+                                    <input required type="password" asp-for="Input.Password" id="InputPassword" class="form-control" placeholder="Password" />
+                                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                </div>
+                                <div class="field">
+                                    <label class="label_field hidden">hidden label</label>
+                                    <label class="form-check-label">
+                                        <input type="checkbox" asp-for="Input.RememberMe" class="form-check-input"> Remember Me
+                                    </label>
+                                    <a class="forgot" href="">Forgotten Password?</a>
+                                </div>
+                                <div class="field margin_0">
+                                    <label class="label_field hidden">hidden label</label>
+                                    <button class="main_bt">Sign In</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="~/DesignTemplate/js/jquery.min.js"></script>
+    <script src="~/DesignTemplate/js/popper.min.js"></script>
+    <script src="~/DesignTemplate/js/bootstrap.min.js"></script>
+    <!-- wow animation -->
+    <script src="~/DesignTemplate/js/animate.js"></script>
+    <!-- select country -->
+    <script src="~/DesignTemplate/js/bootstrap-select.js"></script>
+    <!-- nice scrollbar -->
+    <script src="~/DesignTemplate/js/perfect-scrollbar.min.js"></script>
+    <script>
+        var ps = new PerfectScrollbar('#sidebar');
+    </script>
+    <!-- custom js -->
+    <script src="~/DesignTemplate/js/custom.js"></script>
+</div>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+}
